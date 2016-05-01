@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubjectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class SubjectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,6 +22,7 @@ class SubjectViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.alwaysBounceVertical = true
+        searchBar.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,13 +50,12 @@ class SubjectViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
- 
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
     
     

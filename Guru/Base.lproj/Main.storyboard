@@ -98,8 +98,8 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="7aw-eJ-iH7"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bar" destination="MSp-Oe-YtE" id="Byw-vX-X8L"/>
                         <outlet property="collectionView" destination="HM7-c4-1bO" id="Y9j-af-iqn"/>
-                        <outlet property="searchBar" destination="MSp-Oe-YtE" id="VFQ-w2-j6T"/>
                         <segue destination="Wz4-Np-Ztl" kind="push" identifier="toSubject" id="L7Y-d3-q1x"/>
                     </connections>
                 </viewController>

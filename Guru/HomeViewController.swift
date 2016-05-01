@@ -8,13 +8,14 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
 
     //Bindings
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var bar: UISearchBar!
     
     //Variables
+    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
     var subjects = ["Math", "Computer Science", "Biology", "Dank Memes", "History", "Chemistry", "Physics", "English", "Spanish"]
 
     override func viewDidLoad() {
@@ -25,13 +26,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.showsVerticalScrollIndicator = false
-        self.resignFirstResponder()
+        searchBar.delegate = self
+        searchBar.placeholder = "Subject"
+        var leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    /**
+     CollectionView Functions
+     */
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -66,6 +74,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return 0.0
     }
     
+    /**
+     Search bar functions
+     */
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        searchBar.resignFirstResponder()
+    }
+    
+    
+    /**
+     Segues
+     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toSubject" {
             let vc = segue.destinationViewController as! SubjectViewController
